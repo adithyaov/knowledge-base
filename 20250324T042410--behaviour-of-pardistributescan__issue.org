@@ -37,9 +37,14 @@ sendToWorker_ chan a = go
             -- go
 #+END_SRC
 
-We deliberately error out here. I don't see a reason why we should not block on
-input. There is a possibility that the error case was used for testing. We
-should uncomment the blocking code and remove the error part.
+
+We deliberately error out here.
+
+** Solution
+
+I don't see a reason why we should not block on input. There is a possibility
+that the error case was used for testing. We should uncomment the blocking code
+and remove the error part.
 
 * Non-terminating Scans + Finite Streams
 
@@ -62,6 +67,24 @@ stream is terminated, all the scanning will have terminated and there will be no
 output.  Since there will be no output the output doorbell is never rung so we
 are [[block on the output door bell][blocked indefinitely on the output door bell]].
 
+** Solution
+
+We already communicate with the the input stream had ended by sending a
+=ChildStopEvent=.
+
+#+BEGIN_SRC haskell
+            Stop -> do
+                Prelude.mapM_ finalize (fmap fst running)
+                return $ ScanDrain q db running
+#+END_SRC
+
+=finalize= sends a =ChildStopEvent= to all the scans channels. Although we end
+the stream after reciving a =ChildStopEvent=, we don't end the Scan.
+
+The most straightworfard solution is to send raw events to the scan and pass the
+control flow to the scan itself. We can end the scan once the manager scan
+receives a =ChildStopEvent=.
+
 * Terminating Scans + Limited Input Buffer
 
 The following loop sets the context:
@@ -75,3 +98,12 @@ The following loop sets the context:
 generally not a problem as the input buffer is consumed most of the time. But if
 the scan in question is terminated after collecting the outputs then the input
 buffer is never consumed and =sendToWorker_= blocks indefinitely.
+
+** Solution
+
+We can choose to make the manager scan a non-terminating scan by default. And
+only terminate it on receiving a =ChildStopEvent=. The caller is responsible for
+sending a =ChildStopEvent= to the manager fold to cleaning it up.
+
+This way, the extra input is always drained before the caller decides to not
+send any more input.
