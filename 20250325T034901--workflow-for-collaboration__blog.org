@@ -1,0 +1,56 @@
+#+title:      Workflow for Collaboration
+#+date:       [2025-03-25 Tue 03:49]
+#+filetags:   :blog:
+#+identifier: 20250325T034901
+
+Collaboration is not a simple process. It’s certainly not always natural, but
+over time, through working with different kinds of people, it becomes more
+intuitive.
+
+This write-up briefly describes how I choose to collaborate with others.
+
+My process is by no means the best—it’s simply what works for me. At the end of
+the day, if you have a process that yields good results, you shouldn't feel
+pressured to change it.
+
+Collaboration is essentially about communicating your thoughts in a clear and
+concise manner while leaving room for modification based on others’ input.
+
+* How should you start communicating?
+
+To initiate a discussion with someone, you first need to establish context. The
+context should be comprehensive enough for a reasonable newcomer to understand.
+
+The best way to create this context is through a text document, as it allows
+collaborators to read and revisit the information at their own pace. Most
+importantly, it’s convenient. Writing and sharing a text document is relatively
+simple compared to other methods. Additionally, a well-prepared document
+encourages asynchronous work.
+
+The next step is discussion based on the shared context. This discussion will
+bring new insights, making some of the original context outdated while
+introducing new ideas that should be incorporated. You should update the
+document accordingly, preserving all relevant information. Any changes resulting
+from the discussion should be tracked, and a history of these modifications
+should be maintained.
+
+The final step is to define a clear set of tasks that will conclude the context
+and discussion.
+
+* The Most Important Step: Discipline
+
+There’s one more step that must be present throughout the entire process:
+discipline. It’s easy to get ahead of ourselves and resort to quick, half-baked
+communication for immediate responses. However, that approach is rarely
+effective. Developing discipline in collaboration takes time, just like any
+other habit.
+
+* Tools
+
+I’ve grown fond of Notion because it offers many of the features I need. Most
+importantly, it makes editing text and discussing specific parts of a document
+convenient.
+
+I also want to experiment with using a GitHub repository for storing documents
+and enabling discussions through comments on specific commits. I’ll share my
+thoughts on that workflow once I’ve had enough experience with it.
