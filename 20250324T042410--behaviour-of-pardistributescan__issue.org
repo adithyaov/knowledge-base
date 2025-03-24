@@ -1,0 +1,78 @@
+#+title:      Behaviour of parDistributeScan
+#+date:       [2025-03-24 Mon 04:24]
+#+filetags:   :issue:
+#+identifier: 20250324T042410
+
+There are currently 3 issues with =parDistributeScan=.
+
+1. =sendToWorker_= errors out when there is no spacce in the input buffer
+   instead of blocking
+2. Non-terminating scans + Finite streams results in a deadlock
+3. Terminating scans with limited input buffer results in a deadlock
+
+* sendToWorker_
+
+#+BEGIN_SRC haskell
+{-# INLINE sendToWorker_ #-}
+sendToWorker_ :: MonadAsync m => Channel m a b -> a -> m ()
+sendToWorker_ chan a = go
+
+    where
+
+    -- Recursive function, should we use SPEC?
+    go = do
+        r <- isBufferAvailable chan
+        if r
+        then do
+            liftIO
+                $ void
+                $ sendEvent
+                    (inputQueue chan)
+                    (inputItemDoorBell chan)
+                    (ChildYield a)
+        else do
+            error "sendToWorker_: No space available in the buffer"
+            -- Block for space
+            -- () <- liftIO $ takeMVar (inputSpaceDoorBell chan)
+            -- go
+#+END_SRC
+
+We deliberately error out here. I don't see a reason why we should not block on
+input. There is a possibility that the error case was used for testing. We
+should uncomment the blocking code and remove the error part.
+
+* Non-terminating Scans + Finite Streams
+
+The loop of =parDistributeScan= works in the following way once the stream has
+terminated:
+
+- <<Collect the outputs>>
+  - Check for outputs from the list of scan channels: =[Channel]=.
+  - Remove any terminated scans from the list of scan channels.
+  - Return the outputs.
+- Check if we have running scans
+  - If we have running scans, check for outputs
+    - If we have outputs yield them
+    - If we don't have outputs, **block on the output door bell** and then yield
+      the outputs
+  - If there are no running scans, yield the outputs and end the loop
+
+When we have scans that run forever we always have running scans. Once the
+stream is terminated, all the scanning will have terminated and there will be no
+output.  Since there will be no output the output doorbell is never rung so we
+are [blocked indefinitely on the output
+doorbell](siyuan://blocks/20250324031142-0hh308p).
+
+* Terminating Scans + Limited Input Buffer
+
+The following loop sets the context:
+
+- [[Collect the outputs]]
+- Fetch the next input from the input stream
+- Send the input to all the workers using ​=sendToWorker_=
+- Yield the outputs and continue.
+
+=sendToWorker_= blocks when there is no space in the input buffer. This is
+generally not a problem as the input buffer is consumed most of the time. But if
+the scan in question is terminated after collecting the outputs then the input
+buffer is never consumed and =sendToWorker_= blocks indefinitely.
