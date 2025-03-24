@@ -53,15 +53,14 @@ terminated:
 - Check if we have running scans
   - If we have running scans, check for outputs
     - If we have outputs yield them
-    - If we don't have outputs, **block on the output door bell** and then yield
+    - If we don't have outputs, <<block on the output door bell>> and then yield
       the outputs
   - If there are no running scans, yield the outputs and end the loop
 
 When we have scans that run forever we always have running scans. Once the
 stream is terminated, all the scanning will have terminated and there will be no
 output.  Since there will be no output the output doorbell is never rung so we
-are [blocked indefinitely on the output
-doorbell](siyuan://blocks/20250324031142-0hh308p).
+are [[block on the output door bell][blocked indefinitely on the output door bell]].
 
 * Terminating Scans + Limited Input Buffer
 
