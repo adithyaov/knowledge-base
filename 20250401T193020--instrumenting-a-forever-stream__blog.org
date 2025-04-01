@@ -1,0 +1,74 @@
+#+title:      Instrumenting a Forever Stream
+#+date:       [2025-04-01 Tue 19:30]
+#+filetags:   :blog:
+#+identifier: 20250401T193020
+
+In the context of =hs-opentelemetry=, instrumenting an action involves creating
+a span at the beginning of the action and ending the span after the action.
+
+Example,<<1>>
+#+begin_src haskell
+  function :: IO ()
+  function = do
+    ...
+    s <- startSpan
+    action
+    endSpan s
+    ...
+
+#+end_src
+
+Consider the following code and requirements:
+
+#+begin_src haskell
+  function :: IO ()
+  function =
+      Stream.repeat processBatch
+        & Stream.fold Fold.drain
+    where
+      processBatch = do
+        ...
+#+end_src
+
+**Requirements:**
+1. We want to have visibility on =processBatch=.
+2. We want to have visibility over the entire stream execution as well.
+
+Instrumenting =processBatch= is straightforward. It's similar to [[1][this]].
+
+But instrumenting the entire stream is not. We can add the =startSpan= a the
+beginning using =Stream.before= but where will you add =endSpan=. You might say
+=Stream.after= but this is a stream that runs forever and there is no **after**
+forever.
+
+A nicer approach that gives more visibility for such streams is to group the
+stream and instrument the groups.
+
+#+begin_example
+Forever Stream:
+
+[0] -> [1] -> [2] -> ... -> [999] -> [1000] -> ...
+
+Grouped Forever Stream (groupsOf 100):
+
+[ [0] -> [1] -> ...[99] ] -> [ [100] -> ... -> [199] ] -> ...
+#+end_example
+
+Since the number of elements in this group is finite in nature, instrumenting
+these groups is simpler. We =startSpan= at the beginning of every group and
+=endSpan= at the end of every group.
+
+We can do something like this:
+
+#+begin_src haskell
+  function :: IO ()
+  function =
+      Stream.repeat processBatch
+        & Stream.groupsOf 100 wrapSpan
+        & Stream.fold Fold.drain
+    where
+      processBatch = do
+        ...
+#+end_src
+
+This way we get the live instrumentation data frequently.
