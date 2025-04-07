@@ -1,0 +1,36 @@
+#+title:      Adding an afterForkHook in streamly
+#+date:       [2025-04-07 Mon 20:51]
+#+filetags:   :blog:
+#+identifier: 20250407T205141
+
+I've been trying to use =hs-opentelemetry= in a project. The library provides
+some combinators to wrap sections of your code in a span for telemetry.
+
+Every span has a certain context it needs to work with. =hs-opentelemetry=
+stores that context in the haskell thread-local storage.
+
+The combinators in =hs-opentelemetry= derive the parent context from the
+thread-local storage. This context is used for propagating the parent context so
+that the parent-child relationship is preserved in the telemetry.
+
+But when we fork a thread, the context is lost as the parent context isn't
+propagated. The solution to this is to manually set the context in the child
+thread after the fork.
+
+We need to extend =streamly= to accommodate this kind of a functionality.
+
+* Requirements
+
+- We need a user-defined action to run after a fork.
+- This user defined action should be configurable in a clean way.
+
+* Proposal
+
+We can extend the concurrent configuration to have the =afterForkHook=.
+
+API:
+#+begin_src haskell
+  afterForkHook :: IO a -> Config -> Config
+#+end_src
+
+We need to modify streamly accordingly so that this option will take effect.
