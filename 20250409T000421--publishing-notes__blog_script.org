@@ -7,28 +7,24 @@ I'm trying to re-organize all my notes in a flat structure. I found org-denote
 to suit my needs. I want to also publish these notes as a static website using
 minimal dependencies.
 
-We need to install the required dependencies first. We can use =straight= as our
-package manager.
+We need to install the required dependencies first. I would want to use
+=straight= as the package manager but in the sprit of keeping dependencies to a
+minimum:
 
-#+begin_src emacs-lisp :results output silent :tangle build.el
-  (defvar bootstrap-version)
-  (let ((bootstrap-file
-          (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-         (bootstrap-version 5))
-    (unless (file-exists-p bootstrap-file)
-      (with-current-buffer
-        (url-retrieve-synchronously
-          "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-          'silent 'inhibit-cookies)
-        (goto-char (point-max))
-        (eval-print-last-sexp)))
-    (load bootstrap-file nil 'nomessage))
+#+begin_src emacs-lisp
+(require 'package)
+(setq package-user-dir (expand-file-name "./.packages"))
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
 #+end_src
 
 =htmlize= is a prerequisite to create html files. We need to install =htmlize=.
 
 #+begin_src emacs-lisp :results output silent :tangle build.el
-  (straight-use-package 'htmlize)
+  (package-install 'htmlize)
 #+end_src
 
 I'll use =ox-publish= for this use-case.
