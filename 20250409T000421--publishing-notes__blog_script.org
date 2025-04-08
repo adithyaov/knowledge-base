@@ -44,11 +44,11 @@ what is to be published.
         :base-directory (expand-file-name "./")
         :publishing-directory (expand-file-name "./dist")
         :publishing-function 'org-html-publish-to-html
-        :with-author nil           ;; Don't include author name
-        :with-creator t            ;; Include Emacs and Org versions in footer
-        :with-toc t                ;; Include a table of contents
-        :section-numbers nil       ;; Don't include section numbers
-        :time-stamp-file nil       ;; Don't include time stamp in file
+        :with-author nil           ; Don't include author name
+        :with-creator t            ; Include Emacs and Org versions in footer
+        :with-toc nil              ; Don't include a table of contents
+        :section-numbers nil       ; Don't include section numbers
+        :time-stamp-file nil       ; Don't include time stamp in file
 
         ;; sitemap will behave like an index page
         :auto-sitemap t
