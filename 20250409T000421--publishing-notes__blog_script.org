@@ -7,6 +7,30 @@ I'm trying to re-organize all my notes in a flat structure. I found org-denote
 to suit my needs. I want to also publish these notes as a static website using
 minimal dependencies.
 
+We need to install the required dependencies first. We can use =straight= as our
+package manager.
+
+#+begin_src emacs-lisp :results output silent :tangle build.el
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+          (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+         (bootstrap-version 5))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+        (url-retrieve-synchronously
+          "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+          'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+#+end_src
+
+=htmlize= is a prerequisite to create html files. We need to install =htmlize=.
+
+#+begin_src emacs-lisp :results output silent :tangle build.el
+  (straight-use-package 'htmlize)
+#+end_src
+
 I'll use =ox-publish= for this use-case.
 
 #+begin_src emacs-lisp :results output silent :tangle build.el
@@ -25,7 +49,7 @@ what is to be published.
         :publishing-directory (expand-file-name "~/org-denote-dist")
         :publishing-function 'org-html-publish-to-html
         :with-author nil           ;; Don't include author name
-        :with-creator nil          ;; Include Emacs and Org versions in footer
+        :with-creator t            ;; Include Emacs and Org versions in footer
         :with-toc t                ;; Include a table of contents
         :section-numbers nil       ;; Don't include section numbers
         :time-stamp-file nil       ;; Don't include time stamp in file
