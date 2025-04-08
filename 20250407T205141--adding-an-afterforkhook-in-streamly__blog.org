@@ -34,3 +34,17 @@ API:
 #+end_src
 
 We need to modify streamly accordingly so that this option will take effect.
+
+* Update
+
+Adding an =afterForkHook= might create problems. This seems a little hacky and
+the behaviour can be hard to define in situations with deep parent-child
+relationship.
+
+Instead, we should model this problem in terms of inheritance.
+- There is a parent thread and there is a child thread
+- Some properties of the parent thread should be inherited by the child thread
+  when forked.
+
+This is a good start and seems like a cleaner way to share properties between
+threads.
