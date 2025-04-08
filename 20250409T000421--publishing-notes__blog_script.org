@@ -76,7 +76,7 @@ Generate the site output:
 To preview the generated website:
 
 #+begin_src emacs-lisp :results output silent
-  (httpd-serve-directory (expand-file-name "~/org-denote-dist"))
+  (httpd-serve-directory (expand-file-name "./"))
 #+end_src
 
 You can stop the http server once you're done previewing
