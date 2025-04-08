@@ -9,14 +9,14 @@ minimal dependencies.
 
 I'll use =ox-publish= for this use-case.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :results output silent
   (require 'ox-publish)
 #+end_src
 
 Let's define some vaiables that control what is to be included in the blog and
 what is to be published.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :results output silent
   (setq org-publish-project-alist
     (list
       (list "my-org-site"
@@ -39,24 +39,24 @@ what is to be published.
 
 To remove the validation link, we need to set another variable:
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :results output silent
   (setq org-html-validation-link nil)
 #+end_src
 
 Generate the site output:
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :results output silent
   (org-publish-all t)
 #+end_src
 
 To preview the generated website:
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :results output silent
   (httpd-serve-directory (expand-file-name "~/org-denote-dist"))
 #+end_src
 
 You can stop the http server once you're done previewing
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :results output silent
   (httpd-stop)
 #+end_src
