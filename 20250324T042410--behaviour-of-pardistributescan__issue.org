@@ -107,3 +107,7 @@ sending a =ChildStopEvent= to the manager fold to cleaning it up.
 
 This way, the extra input is always drained before the caller decides to not
 send any more input.
+
+* Update
+
+https://github.com/composewell/streamly/pull/3007
