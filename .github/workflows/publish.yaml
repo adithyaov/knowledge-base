@@ -8,18 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: git
-        run: |
-          git --version
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
       - name: Set up Emacs
         uses: purcell/setup-emacs@v6.0
         with:
           version: "29.4"
       - name: Build the website
         run: ./build.sh
-      - name: artifact
+      - name: Upload the artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist/
