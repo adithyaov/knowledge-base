@@ -1,0 +1,62 @@
+#+title:      Publishing notes
+#+date:       [2025-04-09 Wed 00:04]
+#+filetags:   :blog:script:
+#+identifier: 20250409T000421
+
+I'm trying to re-organize all my notes in a flat structure. I found org-denote
+to suit my needs. I want to also publish these notes as a static website using
+minimal dependencies.
+
+I'll use =ox-publish= for this use-case.
+
+#+begin_src emacs-lisp
+  (require 'ox-publish)
+#+end_src
+
+Let's define some vaiables that control what is to be included in the blog and
+what is to be published.
+
+#+begin_src emacs-lisp
+  (setq org-publish-project-alist
+    (list
+      (list "my-org-site"
+        :recursive nil
+        :base-directory (expand-file-name "~/org-denote")
+        :publishing-directory (expand-file-name "~/org-denote-dist")
+        :publishing-function 'org-html-publish-to-html
+        :with-author nil           ;; Don't include author name
+        :with-creator nil          ;; Include Emacs and Org versions in footer
+        :with-toc t                ;; Include a table of contents
+        :section-numbers nil       ;; Don't include section numbers
+        :time-stamp-file nil       ;; Don't include time stamp in file
+
+        ;; sitemap will behave like an index page
+        :auto-sitemap t
+        :sitemap-filename "index.org"
+        :sitemap-sort-files 'anti-chronologically
+        :sitemap-title "Listing")))
+#+end_src
+
+To remove the validation link, we need to set another variable:
+
+#+begin_src emacs-lisp
+  (setq org-html-validation-link nil)
+#+end_src
+
+Generate the site output:
+
+#+begin_src emacs-lisp
+  (org-publish-all t)
+#+end_src
+
+To preview the generated website:
+
+#+begin_src emacs-lisp
+  (httpd-serve-directory (expand-file-name "~/org-denote-dist"))
+#+end_src
+
+You can stop the http server once you're done previewing
+
+#+begin_src emacs-lisp
+  (httpd-stop)
+#+end_src
