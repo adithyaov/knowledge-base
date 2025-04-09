@@ -25,6 +25,7 @@ minimum:
 
 #+begin_src emacs-lisp :results output silent :tangle build.el
   (package-install 'htmlize)
+  (setq org-html-htmlize-output-type 'css)
 #+end_src
 
 I'll use =ox-publish= for this use-case.
@@ -74,7 +75,7 @@ Improving the page styling:
   (setq org-html-head
     (concat
       "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css\" />\n"
-      "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/sakura.css/css/sakura-vader.css\" />"))
+      "<link rel=\"stylesheet\" href=\"https://gongzhitaao.org/orgcss/org.css\" />"))
 #+end_src
 
 Generate the site output:
