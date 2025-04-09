@@ -22,9 +22,11 @@ minimum:
 #+end_src
 
 =htmlize= is a prerequisite to create html files. We need to install =htmlize=.
+=haskell-mode= is required for haskell syntax highlighting.
 
 #+begin_src emacs-lisp :results output silent :tangle build.el
   (package-install 'htmlize)
+  (package-install 'haskell-mode)
   (setq org-html-htmlize-output-type 'css)
 #+end_src
 
