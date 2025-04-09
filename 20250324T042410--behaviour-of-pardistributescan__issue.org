@@ -51,7 +51,7 @@ and remove the error part.
 The loop of =parDistributeScan= works in the following way once the stream has
 terminated:
 
-- <<Collect the outputs>>
+- Collect the outputs<<1>>
   - Check for outputs from the list of scan channels: =[Channel]=.
   - Remove any terminated scans from the list of scan channels.
   - Return the outputs.
@@ -89,7 +89,7 @@ receives a =ChildStopEvent=.
 
 The following loop sets the context:
 
-- [[Collect the outputs]]
+- [[1][Collect the outputs]]
 - Fetch the next input from the input stream
 - Send the input to all the workers using ​=sendToWorker_=
 - Yield the outputs and continue.
