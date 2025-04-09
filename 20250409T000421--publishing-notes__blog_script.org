@@ -44,23 +44,37 @@ what is to be published.
         :base-directory (expand-file-name "./")
         :publishing-directory (expand-file-name "./dist")
         :publishing-function 'org-html-publish-to-html
-        :with-author nil           ; Don't include author name
-        :with-creator t            ; Include Emacs and Org versions in footer
-        :with-toc nil              ; Don't include a table of contents
-        :section-numbers nil       ; Don't include section numbers
-        :time-stamp-file nil       ; Don't include time stamp in file
+
+        :with-author nil
+        :with-creator nil
+        :with-toc nil
+        :section-numbers nil
+        :with-date nil
+        :with-timestamps nil
+        :time-stamp-file nil
 
         ;; sitemap will behave like an index page
         :auto-sitemap t
         :sitemap-filename "index.org"
         :sitemap-sort-files 'anti-chronologically
-        :sitemap-title "Listing")))
+        :sitemap-title "Index")))
 #+end_src
 
 To remove the validation link, we need to set another variable:
 
 #+begin_src emacs-lisp :results output silent :tangle build.el
   (setq org-html-validation-link nil)
+#+end_src
+
+Improving the page styling:
+
+#+begin_src emacs-lisp :results output silent :tangle build.el
+  (setq org-html-head-include-scripts nil
+        org-html-head-include-default-style nil)
+  (setq org-html-head
+    (concat
+      "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css\" />\n"
+      "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/sakura.css/css/sakura-vader.css\" />"))
 #+end_src
 
 Generate the site output:
