@@ -49,7 +49,7 @@ Low level helpers to play with =Span=:
 
 The current =Span= that runs is associated with a haskell =Thread=. The context
 of the running =Span= is saved in the thread local
-storage. ([https://hackage.haskell.org/package/thread-utils-context][thread-utils-context](thread-utils-context))
+storage. ([[https://hackage.haskell.org/package/thread-utils-context][thread-utils-context]])
 
 At any point of time, there is only **one** =Span= in the current context. When
 a child =Span= to starts, the parent =Span= is taken out of the current context
