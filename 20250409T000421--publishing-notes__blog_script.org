@@ -11,7 +11,7 @@ We need to install the required dependencies first. I would want to use
 =straight= as the package manager but in the sprit of keeping dependencies to a
 minimum:
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :results output silent :tangle build.el
 (require 'package)
 (setq package-user-dir (expand-file-name "./.packages"))
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
