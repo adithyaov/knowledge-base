@@ -48,6 +48,9 @@ what is to be published.
         :publishing-directory (expand-file-name "./dist")
         :publishing-function 'org-html-publish-to-html
 
+        ;; Don't publish files that have the "draft" tag.
+        :exclude "_draft"
+
         :with-author nil
         :with-creator nil
         :with-toc nil
@@ -89,7 +92,7 @@ Generate the site output:
 To preview the generated website:
 
 #+begin_src emacs-lisp :results output silent
-  (httpd-serve-directory (expand-file-name "./"))
+  (httpd-serve-directory (expand-file-name "./dist/"))
 #+end_src
 
 You can stop the http server once you're done previewing
