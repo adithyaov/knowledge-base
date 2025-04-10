@@ -1,0 +1,150 @@
+#+title:      Breast Stroke Training Programme
+#+date:       [2025-04-10 Thu 16:45]
+#+filetags:   :blog:
+#+identifier: 20250410T164527
+
+#+HTML_HEAD_EXTRA: <style>table { width: 100%; }</style>
+
+**NOTE**: These are scratch notes that need iterative review and formatting!
+
+Swimming is an activity I truly enjoy. I used to swim competitively when I was
+younger but due to a very long break I've lost touch with the sport.
+
+I've recently picked it up again and it was pretty clear that I was out of form.
+The goal right now is to take up one stroke and practice till I master it.
+
+I plan to start by mastering breast-stroke. This document will serve as a plan
+on how I should approach training. This document will keep changing as I keep
+learning more about the intricacies of the art.
+
+I found this video to be very informative:
+https://www.youtube.com/watch?v=ZsjyLPvFuaM. I'll implement a lot of techniques
+mentioned in the view into my training program.
+
+* Discipline
+
+The most important thing for any kind of training is discipline. We should
+mentally prepare our-self to stick to a goal.
+
+And remember, repetition is key. Do the same thing again and again till it
+becomes a habit. Do not try new things just yet. Take the current plan to heart
+and follow it.
+
+
+* Plan - Beginner
+
+** Warm up
+
+Start by warming up your body before getting into the pool.
+
+| Exercise                      | Reps |
+|-------------------------------+------|
+| Clockwise Shoulder Rolls      |   10 |
+| Anti-Clockwise Shoulder Rolls |   10 |
+| Back stretch                  |   10 |
+| Toe touch                     |   10 |
+
+Once you get into the pool
+
+| Exercise           | Laps |
+|--------------------+------|
+| Slow Breast Stroke |    2 |
+
+** Timing
+
+We will start by practicing our timing the breast-stroke. You should narrate the
+exercise in your mind while doing it.
+
+Breast stroke involves:
+
+- PULL
+- KICK
+- GLIDE
+
+Important to note:
+
+- Take your breath when you do the PULL.
+- Do not pause when you take the breath.
+- Hit the streamline & hold the streamline.
+
+| Exercise                          | Laps |
+|-----------------------------------+------|
+| Hold the streamline for 2 seconds |    2 |
+| 2 kicks, 1 pull                   |    2 |
+| Normal breast stroke              |    2 |
+
+** Kick
+
+- Don't have a very wide kick.
+- Knees and legs should stay withing your body line.
+- Knees should not go wider than your shoulders.
+- Heels in your feet should stick out.
+
+| Exercise             | Laps |
+|----------------------+------|
+| Streamline on back   |    2 |
+| Normal breast stroke |    2 |
+
+*** Streamline on back
+- Knees should stay underneath the surface of the water.
+- Put your hands outward or underneath your body.
+- Get your heels all the way back to your bum.
+
+** Amplitude
+
+- Stay out of the water for a fraction of a second.
+- Stay low, don't come too high out of the water.
+- Try to be at the surface level of the water when the hands are coming forward.
+
+| Exercise             | Laps |
+|----------------------+------|
+| Streamline on front  |    2 |
+| Normal breast stroke |    2 |
+
+** Elbows
+
+- Early vertical form (EVF) catch.
+- Pull water with all of your hand.
+
+| Exercise             | Laps |
+|----------------------+------|
+| Front skull          |    2 |
+| Normal breast stroke |    2 |
+
+
+*** Front skull
+
+- Hand moment should be similar to when you're treading the water.
+- Think of it like icing the cake.
+
+** Swim fast
+
+- More efficient when you swim fast.
+
+| Exercise                             | Laps |
+|--------------------------------------+------|
+| Flutter kick with breast stroke pull |    2 |
+| Normal breast stroke                 |    2 |
+
+** Stroke Count
+
+- Start with a normal pace and count your strokes.
+- Keep decreasing the number of strokes by 1 for every lap.
+- The idea is if you want to reach the end of the pool with lesser number of
+  stokes then you need to be more efficient with the timing and your kicks
+  should be powerful.
+- Then slowly increase the number of strokes back to normal.
+
+If you assume that the normal pace stoke count is 8. Your laps should look like
+the following.
+
+| Lap number | Stroke count |
+|------------+--------------|
+|          1 |            8 |
+|          2 |            7 |
+|          3 |            6 |
+|          4 |            5 |
+|          5 |            5 |
+|          6 |            6 |
+|          7 |            7 |
+|          8 |            8 |
