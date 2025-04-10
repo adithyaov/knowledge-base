@@ -21,8 +21,8 @@ minimum:
   (package-refresh-contents))
 #+end_src
 
-=htmlize= is a prerequisite to create html files. We need to install =htmlize=.
-=haskell-mode= is required for haskell syntax highlighting.
+=htmlize= is used for giving structure to plain text. Here we use it for
+syntax-highlighting. =haskell-mode= is required for Haskell syntax highlighting.
 
 #+begin_src emacs-lisp :results output silent :tangle build.el
   (package-install 'htmlize)
